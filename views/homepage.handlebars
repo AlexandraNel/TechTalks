@@ -1,0 +1,6 @@
+{{!-- check if user is logged in  --}}
+{{#if logged_in}}
+{{>dashboard}} {{!-- redirect to partial  --}}
+{{else}}
+{{>Landing}} {{!-- redirect to partial  --}}
+{{/if}}

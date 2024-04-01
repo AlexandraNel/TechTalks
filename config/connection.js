@@ -1,7 +1,6 @@
 // connect sequeliza to mySQL using .env credentials
 //use JAWS_DB to allow for Heroku deployment
-
-const Sequelize = require('sequelize');
+const Sequelize = require('sequelize'); 
 require('dotenv').config();
 
 let sequelize;
