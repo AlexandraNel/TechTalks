@@ -12,6 +12,7 @@ Blog.init(
             type: DataTypes.INTEGER,
             allowNull: false,
             autoIncrement: true,
+            primaryKey: true,
         },
         title: {
             type: DataTypes.STRING,
@@ -24,8 +25,15 @@ Blog.init(
         },
         body: {
             type: DataTypes.TEXT,
-            allownull: false,
-        }
+            allowNull: false,
+        },
+        user_id: {
+            type: DataTypes.INTEGER,
+            references: {
+                model: 'user',
+                key: 'id',
+            }
+          },
     },
     {
         sequelize,
