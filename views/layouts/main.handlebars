@@ -4,28 +4,45 @@
 <head>
     <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1" />
     <title>Tech Talks</title>
+    <link href="./style.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
+
 </head>
 
 <body>
-    <nav class="navbar navbar-expand{-sm} bg-body-tertiary" style=" background-color: $teal-500">
-        <div class="container text-center">
-            <div class="row align-items-start">
-                <div class="col">
-                    One of three columns
-                </div>
-                <div class="col">
-                    One of three columns
-                </div>
-                <div class="col">
-                    One of three columns
+    <nav class="navbar bg-body-tertiary brand-bg">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="/">
+                <img src="./techtalkslogo.png" alt="Logo" width="30" height="30" class="d-inline-block align-text-top">
+                Tech Talks
+            </a>
+            {{#if logged_in}}
+            <button type="button" class="btn btn-warning" id="logoutButton">Logout</button>
+            {{else}}
+            <button onclick="window.location.href='/login';" type="button" class="btn btn-warning"
+                id="loginPage">Login</button>
+            {{/if}}
+        </div>
+    </nav>
+
+    <div class="container-fluid">
+        {{!-- handlebars to be injected here --}}
+        {{{body}}}
+    </div>
+
+    <footer class="mt-3">
+        <div class="container-fluid fixed-bottom py-3 brand-bg">
+            <div class="row align-items-center text-center">
+                <div class="col-12"> <!-- Corrected class name from "col 12" to "col-12" -->
+                    <img src="./techtalkslogo.png" alt="Logo" width="30" height="30"
+                        class="d-inline-block align-middle">
+                    <div> Alexandra Nel 2024</div>
                 </div>
             </div>
         </div>
-    </nav>
-    {{!-- handlebars to be injected here --}}
-    {{{body}}}
+    </footer>
 
 
     <!-- Scripts placed at the end of the body for improved loading times -->
@@ -34,14 +51,9 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"
         integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy"
         crossorigin="anonymous"></script>
+    <script src="/js/index.js"></script>
+
 </body>
-<footer>
-   <div class="container text-center">
-  <div class="row align-items-start">
-    <div class="col">
-      Alexandra Nel 2024
-    </div>
-   </div>
-</footer>
+
 
 </html>
