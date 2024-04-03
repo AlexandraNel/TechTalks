@@ -1,6 +1,6 @@
 // CRUD
 const router = require('express').Router();
-const {Blog, User} = require ('../../models');
+const {Blog, User} = require ('../models');
 const withAuths = require('../Utils/auth');
 
 //homepage route homepage will redirect to logged in or not logged in 
@@ -14,3 +14,5 @@ router.get('/', async (req, res) => {
         res.status(500).json(err);
     }
 });
+
+module.exports = router;
