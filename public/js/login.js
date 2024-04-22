@@ -1,13 +1,3 @@
-const logoutButton = document.getElementById("logoutButton");
-//event listeners
-// logoutButton.addEventListener("")
-// document
-// .querySelector('.login-form')
-// .addEventListener('submit', loginFormHandler);
-
-// document
-// .querySelector('.signup-form')
-// .addEventListener('submit', signupFormHandler);
 
 // -----------------------------------------------------------------
 //Nav Login Button Function and Event Listening
@@ -22,6 +12,18 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 });
 
+// -----------------------------------------------------------------
+//LoginPage SignUp Button Function and Event Listening
+document.addEventListener('DOMContentLoaded', function () {
+  const signUpPage = document.getElementById("signUpPage");
+  if (signUpPage) {
+    signUpPage.addEventListener("click", () => {
+      document.location.replace('/signup');
+     });
+    } else {
+        console.error ("Error with the signup redirection");      
+  }
+});
 
 // -----------------------------------------------------------------
 //Login Function followed by event listener
@@ -55,33 +57,5 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 });
 
-
-
-// -----------------------------------------------------------------
-//Signup Function followed by event listener
-const signupFormHandler = async (event) => {
-  event.preventDefault();
-
-  const username = document.querySelector('#username-signup').value.trim();
-  const email = document.querySelector('#email-signup').value.trim();
-  const password = document.querySelector('#password-signup').value.trim();
-
-  if (username && email && password) {
-    const response = await fetch('/api/users', {
-      method: 'POST',
-      body: JSON.stringify({ username, email, password }),
-      headers: { 'Content-Type': 'application/json' },
-    });
-
-    if (response.ok) {
-      document.location.replace('/');
-    } else {
-      alert('Failed to sign up.');
-    }
-  }
-};
-
-const signupFormSubmit = document.getElementById("signupFormSubmit");
-signupFormSubmit.addEventListener("submit", signupFormHandler);
 
 

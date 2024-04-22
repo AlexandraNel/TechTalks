@@ -18,10 +18,13 @@
                 <img src="./techtalkslogo.png" alt="Logo" width="30" height="30" class="d-inline-block align-text-top">
                 Tech Talks
             </a>
+            {{!-- using conditional logic for modular js scripts in public js folder --}}
             {{#if logged_in}}
             <button type="button" class="btn btn-warning" id="logoutButton">Logout</button>
+            <script src="/js/logout.js"></script>
             {{else}}
             <button type="button" class="btn btn-warning" id="loginButton">Login</button>
+            <script src="/js/login.js"></script>
             {{/if}}
         </div>
     </nav>
@@ -29,6 +32,14 @@
     <div class="container-fluid">
         {{!-- handlebars to be injected here --}}
         {{{body}}}
+        {{!-- using conditional logic for modular js scripts in public js folder --}}
+        {{#if loginPage}}
+        <script src="/js/login.js"></script>
+        {{/if}}
+        {{#if signupPage}}
+        <script src="/js/signup.js"></script>
+        {{/if}}
+
     </div>
 
     <footer class="mt-3">
