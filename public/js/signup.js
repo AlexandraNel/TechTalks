@@ -4,9 +4,15 @@
 const signupFormHandler = async (event) => {
   event.preventDefault();
 
-  const username = document.querySelector('#username-signup').value.trim();
-  const email = document.querySelector('#email-signup').value.trim();
-  const password = document.querySelector('#password-signup').value.trim();
+  const username = document.getElementById('username-signup').value.trim();
+  const email = document.getElementById('email-signup').value.trim();
+  const password = document.getElementById('password-signup').value.trim();
+
+  // clientside validation for password
+  if (!password || password.length<8) {
+    alert("Password must be at least 8 characters long");
+    return
+  }
 
   if (username && email && password) {
     const response = await fetch('/api/users', {
@@ -23,7 +29,14 @@ const signupFormHandler = async (event) => {
   }
 };
 
-const signupFormSubmit = document.getElementById("signupFormSubmit");
-signupFormSubmit.addEventListener("submit", signupFormHandler);
+document.addEventListener('DOMContentLoaded', function() {
+  const signupForm = document.getElementById("signupForm");
+  if (signupForm) {
+      signupForm.addEventListener("submit", signupFormHandler);
+  } else {
+      console.error("Signup form not found.");
+  }
+});
+
 
 

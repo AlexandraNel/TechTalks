@@ -18,7 +18,8 @@ router.get('/', async (req, res) => {
 //login page route 
 router.get('/login', async (req, res) => {
     try {
-        res.render('login', { //express looks for homepage within handlebars
+        res.render('login', { 
+            loginPage: true//express looks for homepage within handlebars
         });
     } catch (err) {
         res.status(500).json(err);
@@ -28,7 +29,8 @@ router.get('/login', async (req, res) => {
 //signin page route 
 router.get('/signup', async (req, res) => {
     try {
-        res.render('signup', { //express looks for homepage within handlebars
+        res.render('signup', { 
+            signupPage: true//express looks for homepage within handlebars
         });
     } catch (err) {
         res.status(500).json(err);
