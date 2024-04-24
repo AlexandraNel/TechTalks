@@ -1,2 +1,31 @@
+<!-- views/partials/dashboard.handlebars -->
+
 <h1>Dashboard</h1>
-<h2>Welcome!</h2>
+<h2>Welcome, {{user.username}}!</h2>
+
+{{#if allBlogs.length}}
+<div class='blog-container'>
+    <div class='blog-header col-md-10'>
+        <h2>Blog Entries</h2>
+    </div>
+    {{#each allBlogs}}
+    <div class="card mb-3">
+        <div class="card-body">
+            <h5 class="card-title">{{ title }}</h5>
+            <p class="card-text">Author: {{ user.username }}</p>
+            <p class="card-text">{{ truncate body 500 }}</p>
+            <!-- Display a partial of the body text, limit to 500 characters -->
+            <button class="btn btn-outline-warning" type="button" id="read-blog" data-blog-id="{{ id }}>Read</button>
+        </div>
+    </div>
+    {{/each}}
+</div>
+{{else}}
+<p>No blogs found.</p>
+{{/if}}
+
+<div>
+    <button class="btn btn-outline-warning" type="button" id="back-to-list">Back</button>
+</div>
+
+<script src='/js/blog.js'></script>

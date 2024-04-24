@@ -23,8 +23,16 @@ const signupFormHandler = async (event) => {
 
     if (response.ok) {
       document.location.replace('/');
+
     } else {
-      alert('Failed to sign up.');
+
+      const responseData = await response.json();
+
+      if(responseData.error) {
+    alert ('user already exists, try signing in');
+     
+    } else {
+      alert(err);
     }
   }
 };
@@ -36,7 +44,7 @@ document.addEventListener('DOMContentLoaded', function() {
   } else {
       console.error("Signup form not found.");
   }
-});
+});}
 
 
 

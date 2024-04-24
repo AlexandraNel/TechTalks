@@ -1,27 +1,31 @@
-{{!-- check if user is logged in  --}}
-{{#if logged_in}}
-{{>dashboard}} {{!-- redirect to partial  --}}
+{{!-- check if user is logged in --}}
+{{#if loggedIn}}
+{{>dashboard}} {{!-- redirect to partial --}}
 {{else}}
 <div class="container-fluid">
     <div>
-      
+
+
+        {{else}}
         <div class="container-fluid row align-items-center text-center py-3">
-            <h1 class= "py-3">Welcome!</h1>
+            <h1 class="py-3">Welcome!</h1>
             <br>
-            <h5 class = "pb-3">This is Tech Talks, a blog site for developers. </h5>
+            <h5 class="pb-3">This is Tech Talks, a blog site for developers. </h5>
             <p> Developers can publish their blog posts and comment on other developers’ posts as well.</p>
             <p>Built for Devs by Devs </p>
 
-            
+
         </div>
     </div>
 
     <div class="container-fluid col text-center ">
-        <h6 class= "pb-3">Join the community, sign up! Or log in to view your account </h6>
+        <h6 class="pb-3">Join the community, sign up! Or log in to view your account </h6>
         <div class="d-grid gap-2">
-            <button onclick= "window.location.href='/login';" class="btn btn-outline-warning " type="button" id="loginPage">Login</button>
-            <button onclick= "window.location.href='/signup';" class="btn btn-outline-warning" type="button" type="button" id="signUpPage">SignUp</button>
+            <button onclick="window.location.href='/login';" class="btn btn-outline-warning " type="button"
+                id="loginPage">Login</button>
+            <button onclick="window.location.href='/signup';" class="btn btn-outline-warning" type="button"
+                type="button" id="signUpPage">SignUp</button>
         </div>
+
     </div>
 </div>
-{{/if}}

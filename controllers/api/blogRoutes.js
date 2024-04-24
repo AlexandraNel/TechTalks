@@ -1,6 +1,6 @@
 // CRUD
 const router = require('express').Router();
-const { Blog } = require ('../../models');
+const { Blog, User } = require('../../models');
 const withAuths = require('../../Utils/auth');
 
 //new blog
@@ -14,6 +14,31 @@ router.post('/', withAuths, async (req, res) => {
     res.status(200).json(newBlog);
   } catch (err) {
     res.status(400).json(err);
+  }
+});
+
+// getblogs
+router.get('/', withAuths, async (req, res) => {
+  try {
+    const allBlogs = await Blog.findAll({
+      include: { model: User, attributes: ['username'] }
+    });
+
+    res.render('dashboard'), { allBlogs };
+  } catch (err) {
+    res.status(400).json(err);
+  }
+});
+
+//getOneBlog (id is fed through the button FETCH request)
+router.get('/:id', withAuths, async (req, res) => {
+  try{
+    const singleBlog = await Blog.findByPk(req.params.id, {
+      include: {model: User, attributes: ['username'] }
+    });
+    res.json(singleBlog);
+  } catch (err) {
+    res.status(500).json(err);
   }
 });
 
