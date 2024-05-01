@@ -1,3 +1,4 @@
+
 // Event listener for clicking the "Read" button
 document.addEventListener('DOMContentLoaded', function () {
     const readButtons = document.querySelectorAll(".read-blog");

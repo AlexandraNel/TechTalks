@@ -1,0 +1,19 @@
+<div class="container mt-5">
+    <h2>New Blog Post</h2>
+    
+    <form action="/api/blog" method="post">
+
+        <div class="mb-3">
+            <label for="title" class="form-label">Title</label>
+            <input type="text" class="form-control" id="title" name="title" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="body" class="form-label">Blog Entry</label>
+            <textarea class="form-control" id="body" name="body" rows="8" required></textarea>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Submit</button>
+
+    </form>
+</div>

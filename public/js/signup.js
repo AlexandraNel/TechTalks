@@ -3,6 +3,8 @@
 //Signup Function followed by event listener
 const signupFormHandler = async (event) => {
   event.preventDefault();
+  console.log("Signup handler loaded");
+
 
   const username = document.getElementById('username-signup').value.trim();
   const email = document.getElementById('email-signup').value.trim();
@@ -20,21 +22,25 @@ const signupFormHandler = async (event) => {
       body: JSON.stringify({ username, email, password }),
       headers: { 'Content-Type': 'application/json' },
     });
-
+    
     if (response.ok) {
       document.location.replace('/');
-
     } else {
-
-      const responseData = await response.json();
-
-      if(responseData.error) {
-    alert ('user already exists, try signing in');
-     
-    } else {
-      alert(err);
+      try {
+        const responseData = await response.json();
+        if (response.status === 400) {
+          alert(responseData.message || 'Invalid data, please check your input and try again.');
+        } else if (response.status === 409) {
+          alert('User already exists, try signing in.');
+        } else {
+          alert('Failed to sign up. Please try again.');
+        }
+      } catch (error) {
+        alert('Failed to sign up. Please try again.');
+      }
     }
-  }
+  };
+
 };
 
 document.addEventListener('DOMContentLoaded', function() {
@@ -44,7 +50,7 @@ document.addEventListener('DOMContentLoaded', function() {
   } else {
       console.error("Signup form not found.");
   }
-});}
+});
 
 
 

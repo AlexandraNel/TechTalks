@@ -8,7 +8,8 @@ router.get('/', async (req, res) => {
     try {
         res.render('homepage', { //express looks for homepage within handlebars
             // passes loggedin state to the template,
-            loggedIn: req.session.logged_in
+            loggedIn: req.session.loggedIn, //pass logged in status
+            username: req.session.username //pass username
         });
     } catch (err) {
         res.status(500).json(err);
@@ -26,15 +27,42 @@ router.get('/login', async (req, res) => {
     }
 });
 
-//signin page route 
+//signup page route 
 router.get('/signup', async (req, res) => {
     try {
         res.render('signup', { 
-            signupPage: true//express looks for homepage within handlebars
+            signupPage: true//express looks for signup within handlebars
         });
     } catch (err) {
         res.status(500).json(err);
     }
 });
+
+//single blog reading page route
+router.get('/blog/:id', withAuths, async (req, res) => {
+    try {
+        const blog = await Blog.findByPk(req.params.id, {
+            include: { model: User, attributes: ['username'] }
+        });
+        if (blog) {
+            res.render('oneblog', { blog });
+        } else {
+            res.status(404).send('Blog not found');
+        }
+    } catch (error) {
+        res.status(500).send('Server error');
+    }
+});
+
+router.get('/newblog', withAuths, async (req, res) => {
+    try{
+        res.render('newblog', {
+            newblogPage: true
+        });
+    } catch (err) {
+        console.error('Server error finding new blog page:', err); 
+        res.status(500).send('Server error finding new blog page:'); 
+    }
+})
 
 module.exports = router;

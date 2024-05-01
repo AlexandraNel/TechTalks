@@ -5,8 +5,7 @@ const logOut = async (event) => {
   event.preventDefault();
 
      const response = await fetch('/api/users/logout', {
-      method: 'POST',
-      body: JSON.stringify({ email, password }),
+      method: 'POST', //no body required on logout/destroy session
       headers: { 'Content-Type': 'application/json' },
     });
 
@@ -18,7 +17,7 @@ const logOut = async (event) => {
   };
 
 document.addEventListener('DOMContentLoaded', function () {
-  const logoutButton = document.getElementById("logoutButton");;
+  const logoutButton = document.getElementById("logoutButton");
   if (logoutButton) {
     logoutButton.addEventListener("click", logOut);
   } else {

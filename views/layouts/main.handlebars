@@ -19,18 +19,17 @@
                 Tech Talks
             </a>
             {{!-- using conditional logic for modular js scripts in public js folder --}}
-            {{#if logged_in}}
-            <button type="button" class="btn btn-warning" id="logoutButton">Logout</button>
+            {{#if loggedIn}}
+            <button type="button" class="btn btn-warning logOut" id="logoutButton">Logout</button>
             <script src="/js/logout.js"></script>
             {{else}}
-            <button type="button" class="btn btn-warning" id="loginButton">Login</button>
-            <script src="/js/login.js"></script>
+            <button onclick= "window.location.href='/login';" class="btn btn-warning navLogIn " type="button" >Login</button>
             {{/if}}
         </div>
     </nav>
 
     <div class="container-fluid">
-            {{!-- using conditional logic for modular js scripts in public js folder --}}
+        {{!-- using conditional logic for modular js scripts in public js folder --}}
         {{#if loginPage}}
         <script src="/js/login.js"></script>
         {{/if}}
@@ -39,7 +38,7 @@
         {{/if}}
         {{!-- handlebars to be injected here --}}
         {{{body}}}
-    
+
 
     </div>
 
@@ -62,7 +61,11 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"
         integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy"
         crossorigin="anonymous"></script>
- 
+
+    <script src="/js/blog.js"></script>
+  
+
+
 
 </body>
 

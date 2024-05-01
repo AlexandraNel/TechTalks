@@ -1,29 +1,14 @@
-
-// -----------------------------------------------------------------
-//Nav Login Button Function and Event Listening
-document.addEventListener('DOMContentLoaded', function () {
-  const loginButton = document.getElementById("loginButton");
-  if (loginButton) {
-    loginButton.addEventListener("click", () => {
-      document.location.replace('/login');
-     });
-    } else {
-        console.error ("Error with the login redirection");      
-  }
-});
-
-// -----------------------------------------------------------------
-//LoginPage SignUp Button Function and Event Listening
-document.addEventListener('DOMContentLoaded', function () {
-  const signUpPage = document.getElementById("signUpPage");
-  if (signUpPage) {
-    signUpPage.addEventListener("click", () => {
-      document.location.replace('/signup');
-     });
-    } else {
-        console.error ("Error with the signup redirection");      
-  }
-});
+// //Nav Login Button Function and Event Listening
+// document.addEventListener('DOMContentLoaded', function () {
+//   const loginButton = document.getElementById("loginButton");
+//   if (loginButton) {
+//     loginButton.addEventListener("click", () => {
+//       document.location.replace('/login');
+//      });
+//     } else {
+//         console.error ("Error with the login redirection");      
+//   }
+// });
 
 // -----------------------------------------------------------------
 //Login Function followed by event listener

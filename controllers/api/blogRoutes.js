@@ -24,7 +24,7 @@ router.get('/', withAuths, async (req, res) => {
       include: { model: User, attributes: ['username'] }
     });
 
-    res.render('dashboard'), { allBlogs };
+    res.render('dashboard', { allBlogs });
   } catch (err) {
     res.status(400).json(err);
   }
@@ -41,6 +41,8 @@ router.get('/:id', withAuths, async (req, res) => {
     res.status(500).json(err);
   }
 });
+
+
 
 //delete blog
 router.delete('/:id', withAuths, async (req, res) => {
