@@ -6,7 +6,7 @@ const withAuths = require('../Utils/auth');
 //homepage route homepage will redirect to logged in or not logged in 
 router.get('/', async (req, res) => {
     try {
-        res.render('homepage', { //express looks for homepage within handlebars
+                res.render('homepage', { //express looks for homepage within handlebars
             // passes loggedin state to the template,
             loggedIn: req.session.loggedIn, //pass logged in status
             username: req.session.username //pass username
@@ -19,9 +19,14 @@ router.get('/', async (req, res) => {
 //login page route 
 router.get('/login', async (req, res) => {
     try {
+
+        if (req.session.loggedIn) {
+            res.redirect('/');
+        } else {
         res.render('login', { 
-            loginPage: true//express looks for homepage within handlebars
-        });
+            loginPage: true,//express looks for homepage within handlebars
+        })};
+
     } catch (err) {
         res.status(500).json(err);
     }
@@ -41,11 +46,15 @@ router.get('/signup', async (req, res) => {
 //single blog reading page route
 router.get('/blog/:id', withAuths, async (req, res) => {
     try {
+        
         const blog = await Blog.findByPk(req.params.id, {
             include: { model: User, attributes: ['username'] }
         });
         if (blog) {
-            res.render('oneblog', { blog });
+            res.render('oneblog', { 
+                blog: blog, 
+                loggedIn: req.session.loggedIn });
+            
         } else {
             res.status(404).send('Blog not found');
         }
@@ -57,7 +66,8 @@ router.get('/blog/:id', withAuths, async (req, res) => {
 router.get('/newblog', withAuths, async (req, res) => {
     try{
         res.render('newblog', {
-            newblogPage: true
+            newblogPage: true,
+            loggedIn: req.session.loggedIn
         });
     } catch (err) {
         console.error('Server error finding new blog page:', err); 

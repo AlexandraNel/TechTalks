@@ -1,6 +1,8 @@
 {{!-- check if user is logged in --}}
 {{#if loggedIn}}
 {{>dashboard}} {{!-- redirect to partial --}}
+
 {{else}}
 {{>landing}} {{!-- redirect to partial --}}
+
 {{/if}}
