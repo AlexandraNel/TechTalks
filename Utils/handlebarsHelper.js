@@ -1,10 +1,16 @@
-// Register a Handlebars helper to truncate text
+// Utils/handlebarsHelper.js
+
 const Handlebars = require('handlebars');
 
-Handlebars.registerHelper('truncate', function(text, length) {
+// Define your helper functions
+const truncateHelper = (text, length) => {
   if (text.length > length) {
     return text.substring(0, length) + '...';
-  } else {
-    return text;
   }
-});
+  return text;
+};
+
+// Export your helper functions
+module.exports = {
+  truncate: truncateHelper
+};

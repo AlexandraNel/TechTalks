@@ -5,14 +5,29 @@ const withAuths = require('../Utils/auth');
 
 //homepage route homepage will redirect to logged in or not logged in 
 router.get('/', async (req, res) => {
-    try {
-                res.render('homepage', { //express looks for homepage within handlebars
-            // passes loggedin state to the template,
-            loggedIn: req.session.loggedIn, //pass logged in status
-            username: req.session.username //pass username
+    if (req.session.loggedIn) {
+        try {
+            const blogData = await Blog.findAll({
+                include: [{ model: User }],
+                order: [['created', 'DESC']] // Assuming 'created' is a timestamp field
+            });
+
+            const blogs = blogData.map(blog => blog.get({ plain: true }));
+
+            res.render('homepage', {
+                allBlogs: blogs,
+                loggedIn: req.session.loggedIn,
+                username: req.session.username
+            });
+        } catch (err) {
+            console.error(err);
+            res.status(500).json(err);
+        }
+    } else {
+        // If not logged in, redirect or render a different template
+        res.render('login', {  // or redirect using res.redirect('/login');
+            message: "Please log in to view this page"
         });
-    } catch (err) {
-        res.status(500).json(err);
     }
 });
 

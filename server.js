@@ -3,6 +3,7 @@ const express = require('express');
 const session = require('express-session'); //required for auth/security 
 const exphbs = require('express-handlebars'); //handlebars optimised package w/ express
 const routes = require('./controllers');
+const handlebarsHelper = require('./Utils/handlebarsHelper'); // Require the helper file
 
 const sequelize = require('./config/connection');
 const SequelizeStore = require('connect-session-sequelize')(session.Store);
@@ -14,6 +15,9 @@ const PORT = process.env.PORT || 3001;
 const hbs = exphbs.create({
   // Specify the directory for partials
   partialsDir: ['views/partials/'],
+  helpers: {
+    truncate: handlebarsHelper // Register the truncate helper from Utils
+  }
 });
 
 
