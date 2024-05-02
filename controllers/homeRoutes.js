@@ -35,9 +35,12 @@ router.get('/login', async (req, res) => {
 //signup page route 
 router.get('/signup', async (req, res) => {
     try {
+        if (req.session.loggedIn) {
+            res.redirect('/');
+        } else {
         res.render('signup', { 
-            signupPage: true//express looks for signup within handlebars
-        });
+            signupPage: true,//express looks for homepage within handlebars
+        })};
     } catch (err) {
         res.status(500).json(err);
     }
