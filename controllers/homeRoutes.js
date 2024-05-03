@@ -1,6 +1,6 @@
 // CRUD
 const router = require('express').Router();
-const { Blog, User } = require('../models');
+const { Blog, User, Comment } = require('../models');
 const withAuths = require('../Utils/auth');
 
 //homepage route homepage will redirect to logged in or not logged in 
@@ -25,8 +25,8 @@ router.get('/', async (req, res) => {
         }
     } else {
         // If not logged in, redirect or render a different template
-        res.render('login', {  // or redirect using res.redirect('/login');
-            message: "Please log in to view this page"
+        res.render('homepage', {  // or redirect using res.redirect('/login') but prefference was to go to homepage intro
+           homepage:true,
         });
     }
 });

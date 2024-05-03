@@ -1,6 +1,6 @@
 // CRUD
 const router = require('express').Router();
-const { Blog, User } = require('../../models');
+const { Blog, User, Comment } = require('../../models');
 const withAuths = require('../../Utils/auth');
 
 //new blog
@@ -16,7 +16,7 @@ router.post('/', withAuths, async (req, res) => {
   } catch (err) {
     res.status(400).json(err);
   }
-});
+});A
 
 // getblogs
 router.get('/', withAuths, async (req, res) => {
@@ -33,16 +33,18 @@ router.get('/', withAuths, async (req, res) => {
 
 //getOneBlog (id is fed through the button FETCH request)
 router.get('/:id', withAuths, async (req, res) => {
-  try{
+  try {
     const singleBlog = await Blog.findByPk(req.params.id, {
-      include: {model: User, attributes: ['username'] }
+      include: [
+        { model: User, attributes: ['username'] },
+        { model: Comment, include: { model: User, attributes: ['username'] } }
+      ]
     });
     res.json(singleBlog);
   } catch (err) {
     res.status(500).json(err);
   }
 });
-
 
 
 //delete blog

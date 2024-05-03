@@ -16,11 +16,10 @@ const hbs = exphbs.create({
   // Specify the directory for partials
   partialsDir: ['views/partials/'],
   helpers: {
-    truncate: handlebarsHelper // Register the truncate helper from Utils
+    truncate: handlebarsHelper.truncate // Register the truncate helper from Utils
   }
 });
-
-
+ 
 const sess = {
   secret: 'Super secret secret', //prevents hijacking of session
   cookie: {

@@ -26,6 +26,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 });
 
+
 // New blog submit function
 const newBlogFormHandler = async (event) => {
     event.preventDefault();
@@ -70,3 +71,34 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   });
 
+// Event listener for clicking the "Delete" button
+document.addEventListener('DOMContentLoaded', function () {
+    const deleteButtons = document.querySelectorAll(".delete-blog");
+    if (deleteButtons) {
+        deleteButtons.forEach(button => {
+            button.addEventListener("click", async () => {
+                if (confirm("Are you sure you want to delete this blog post?")) {
+                    const blogId = button.dataset.blogId; // Get the blog ID from the button's data attribute
+                    try {
+                        // Send a request to the server to delete the blog post
+                        const response = await fetch(`/api/blog/${blogId}`, {
+                            method: 'DELETE'
+                        });
+
+                        if (response.ok) {
+                            // If the request is successful, redirect the user to the homepage
+                            document.location.replace('/');
+                        } else {
+                            // If the request fails, log an error message
+                            console.error('Failed to delete blog post');
+                        }
+                    } catch (err) {
+                        console.error(err); // Log any errors that occur during the fetch request
+                    }
+                }
+            });
+        });
+    } else {
+        console.error("Error with the delete blog post");
+    }
+});

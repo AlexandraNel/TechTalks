@@ -13,14 +13,15 @@
     <div class='blog-header col-md-10'>
         <h2>Blog Entries</h2>
     </div>
-    {{#each allBlogs}}
-    <div class="card mb-3">
+    {{#each allBlogs as |blog|}}
+    <div class="card mb-3 shadow rounded">
         <div class="card-body">
-            <h5 class="card-title">{{ title }}</h5>
-            <p class="card-text">Author: {{ user.username }}</p>
-            <p class="card-text">{{ truncate body 500 }}</p>
+            <h5 class="card-title">{{ blog.title }}</h5>
+            <p class="card-text">Author: {{ blog.username }}</p>
+            <p class="card-text">{{ truncate blog.body 50 }}</p>
             <!-- Display a partial of the body text, limit to 500 characters -->
 <button class="btn btn-outline-warning read-blog" type="button" data-blog-id="{{id}}">Read</button>
+<button class="btn btn-outline-danger delete-blog" type="button" data-blog-id="{{id}}">Delete</button>
         </div>
     </div>
     {{/each}}
