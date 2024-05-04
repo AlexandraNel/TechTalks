@@ -66,12 +66,12 @@ router.get('/blog/:id', withAuths, async (req, res) => {
     try {
         
         const blog = await Blog.findByPk(req.params.id, {
-            include: { model: User, attributes: ['username'] }
+            include: [{ model: User, attributes: ['username'] }],
         });
         if (blog) {
             res.render('oneblog', { 
-                blog: blog, 
-                loggedIn: req.session.loggedIn });
+                ...blog, 
+                loggedIn: req.session.loggedIn })
             
         } else {
             res.status(404).send('Blog not found');

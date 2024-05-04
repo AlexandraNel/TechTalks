@@ -16,7 +16,9 @@
     "sequelize": "^6.37.2"
   },
   "scripts": {
-    "start": "node server.js"
+    "start": "node server.js",
+    "seed": "node seed/seed.js"
+    
   },
   "name": "techtalks",
   "version": "1.0.0",
