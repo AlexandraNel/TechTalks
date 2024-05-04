@@ -4,7 +4,7 @@
 <h2>Welcome, {{username}}!</h2>
 
 <div>
-    
+
     <a href="/newblog" class="btn btn-warning newBlogBtn" role="button">New Blog</a>
 </div>
 
@@ -20,8 +20,11 @@
             <p class="card-text">Author: {{ blog.username }}</p>
             <p class="card-text">{{ truncate blog.body 50 }}</p>
             <!-- Display a partial of the body text, limit to 500 characters -->
-<button class="btn btn-outline-warning read-blog" type="button" data-blog-id="{{id}}">Read</button>
-<button class="btn btn-outline-danger delete-blog" type="button" data-blog-id="{{id}}">Delete</button>
+            <button class="btn btn-outline-warning read-blog" type="button"
+                data-id="{{blog.id}}">Read</button>
+
+
+
         </div>
     </div>
     {{/each}}

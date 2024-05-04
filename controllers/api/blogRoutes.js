@@ -16,7 +16,7 @@ router.post('/', withAuths, async (req, res) => {
   } catch (err) {
     res.status(400).json(err);
   }
-});A
+});
 
 // getblogs
 router.get('/', withAuths, async (req, res) => {
@@ -25,9 +25,10 @@ router.get('/', withAuths, async (req, res) => {
       include: { model: User, attributes: ['username'] }
     });
 
-    res.render('dashboard', { allBlogs });
+    res.json(allBlogs);
+    
   } catch (err) {
-    res.status(400).json(err);
+    res.status(500).json(err);
   }
 });
 

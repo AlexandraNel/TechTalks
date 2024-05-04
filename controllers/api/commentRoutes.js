@@ -20,7 +20,7 @@ router.post('/', withAuths, async (req, res) => {
     }
   });
 
-  //delete comment
+
 // Delete a comment
 router.delete('/:id', withAuths, async (req, res) => {
   try {

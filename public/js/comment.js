@@ -33,7 +33,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 // Event listener for clicking the "Delete" button for a comment
 document.addEventListener('DOMContentLoaded', function () {
-    const deleteButtons = document.querySelectorAll(".delete-comment");
+    const deleteButtons = document.querySelectorAll("delete-comment");
     if (deleteButtons) {
         deleteButtons.forEach(button => {
             button.addEventListener("click", async () => {
