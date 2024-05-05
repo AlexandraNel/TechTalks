@@ -1,5 +1,5 @@
-<div class="blog-post">
-  <div class="blog-post-header">
+<div class="blog-post m-2 p-2">
+  <div class="blog-post-header h2 text-warning">
     {{title}}
   </div>
   <div class="blog-body">
@@ -7,32 +7,36 @@
 
       {{body}}
     </p>
-    <p>
+    <h5>
       Author:
       {{User.username}}
-    </p>
+    </h5>
 
     <button class="btn btn-outline-danger delete-blog" type="button" data-id="{{id}}">Delete</button>
     <a href='/' class="btn btn-outline-warning " role="button">Back</a>
   </div>
-  <div class="blog-comments border border-primary rounded-lg">
+
+
+  <div class="blog-comment m-2 p-2">
 
     <h3>Comments:</h3>
     {{#each comments}}
-    <div class="comment">
+    <div class="comment p-2">
       <p>{{text}}</p>
-      <small>by {{User.username}}</small>
+      <p class="text-info">by {{User.username}}</p>
       <button class="btn btn-outline-warning delete-comment" type="button" data-comment-id="{{id}}">Delete</button>
 
     </div>
     {{/each}}
+    
     <form id="comment-form">
-      <div class="form-group">
+      <div class="form-group border border-primary rounded-lg m-2 p-2">
         <label for="comment-content">Comment:</label>
         <textarea class="form-control" id="comment-content" rows="3"></textarea>
       </div>
-      <button type="submit" class="btn btn-warning">Submit</button>
+      <button type="submit" class="btn btn-outline-warning">Submit</button>
     </form>
+    
   </div>
 </div>
 
