@@ -1,17 +1,19 @@
 // Event listener for submitting a comment
 document.addEventListener('DOMContentLoaded', function () {
     const commentForm = document.getElementById("comment-form");
+
     if (commentForm) {
         commentForm.addEventListener("submit", async (event) => {
             event.preventDefault();
+
             const commentContent = document.getElementById('comment-content').value;
-            const blogId = document.querySelector('.delete-blog').dataset.blogId;
+            const blogId = document.querySelector('.delete-blog').dataset.id;
 
             try {
                 // Send a request to the server to create a new comment
-                const response = await fetch(`/api/blog/${blogId}/comment`, {
+                const response = await fetch(`/api/comments/`, {
                     method: 'POST',
-                    body: JSON.stringify({ content: commentContent }),
+                    body: JSON.stringify({ text: commentContent, blog_id: blogId }), //key always needs to match the model section
                     headers: { 'Content-Type': 'application/json' },
                 });
 

@@ -12,7 +12,7 @@ router.get('/', async (req, res) => {
                 order: [['created', 'DESC']] // Assuming 'created' is a timestamp field
             });
 
-            const blogs = blogData.map(blog => blog.get({ plain: true }));
+            const blogs = blogData.map(blog => blog.get({ plain: true })); //serialize data
 
             res.render('homepage', {
                 allBlogs: blogs,
@@ -65,10 +65,15 @@ router.get('/signup', async (req, res) => {
 router.get('/blog/:id', withAuths, async (req, res) => {
     try {
         
-        const blog = await Blog.findByPk(req.params.id, {
-            include: [{ model: User, attributes: ['username'] }],
-        });
-        if (blog) {
+        const blogData = await Blog.findByPk(req.params.id, {
+            include: [
+                { model: User, attributes: ['username'] },
+                { model: Comment, include: { model: User, attributes: ['username'] } }
+              ]
+            });
+        if (blogData) {
+            const blog = blogData.get({plain: true}) //serialize data so handlebars does not reject data
+            console.log(blog);
             res.render('oneblog', { 
                 ...blog, 
                 loggedIn: req.session.loggedIn })

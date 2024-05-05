@@ -20,8 +20,7 @@
             <p class="card-text">Author: {{ blog.username }}</p>
             <p class="card-text">{{ truncate blog.body 50 }}</p>
             <!-- Display a partial of the body text, limit to 500 characters -->
-            <button class="btn btn-outline-warning read-blog" type="button"
-                data-id="{{blog.id}}">Read</button>
+            <a href="/blog/{{blog.id}}" class="btn btn-warning newBlogBtn" role="button">Read</a>
 
 
 
@@ -33,4 +32,4 @@
 <p>No blogs found.</p>
 {{/if}}
 
-<script src='/js/blog.js'></script>
+   <script src="/js/blog.js"></script>

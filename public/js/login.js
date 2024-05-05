@@ -25,8 +25,12 @@ const logIn = async (event) => {
       headers: { 'Content-Type': 'application/json' },
     });
 
+    // had to delay reload for dashboard partial
     if (response.ok) {
-      document.location.replace('/');
+      setTimeout(() => {
+        document.location.replace('/');
+      }, 500)
+    
     } else {
       alert('Failed to log in. Have you signed up?');
     }

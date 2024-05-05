@@ -19,33 +19,30 @@ router.post('/', async (req, res) => {
       }
     });
 
+    if (existingUser) {
+      return res.status(400).json({ message: 'User already exists with the given username or email.' });
+    }
 
-if (existingUser) {
-  return res.status(400).json({ message: 'User already exists with the given username or email.' });
-}
+    const dbUserData = await User.create({
+      username: req.body.username,
+      email: req.body.email,
+      password: req.body.password,
+    });
 
-const dbUserData = await User.create({
-  username: req.body.username,
-  email: req.body.email,
-  password: req.body.password,
-});
 
-req.session.loggedIn = true;
-req.session.username = dbUserData.username; //pass username to session
+    req.session.save(() => {
+      req.session.loggedIn = true;
+      req.session.userId = dbUserData.id; // Storing user ID
+      req.session.username = dbUserData.username; // Storing username for personalisation
 
-req.session.save(err => {
-  if (err) {
-    
-    console.error('Session save failed:', err);
-    return res.status(500).send('Failed to update session.');
-  }
-  res.status(200).json({id: dbUserData.id,username: dbUserData.username, email: dbUserData.email, message: 'You are now logged in!'
-});
-});
+         res.status(200).json({
+        id: dbUserData.id, username: dbUserData.username, email: dbUserData.email, message: 'You are now logged in!'
+      });
+    });
 
 } catch (err) {
-console.log(err);
-res.status(500).json({ message: 'Server error during login' });
+  console.log(err);
+  res.status(500).json({ message: 'Server error during login' });
 }
   });
 
@@ -75,22 +72,18 @@ router.post('/login', async (req, res) => {
       return;
     }
 
-    req.session.loggedIn = true;
-    req.session.userId = dbUserData.id; // Storing user ID
-    req.session.username = dbUserData.username; // Storing username for personalisation
-    
+    req.session.save(() => {
+      req.session.loggedIn = true;
+      req.session.userId = dbUserData.id; // Storing user ID
+      req.session.username = dbUserData.username; // Storing username for personalisation
 
-    req.session.save(err => {
-      if (err) {
-        console.error('Session save failed:', err);
-        return res.status(500).send('Failed to update session with user info');
-      }
-     
-      res.status(200).json({ user: dbUserData, message: 'You are now logged in!' });
+      res.status(200).json({
+        id: dbUserData.id, username: dbUserData.username, email: dbUserData.email, message: 'You are now logged in!'
+      });
     });
-    
+
   } catch (err) {
-    console.log(err);
+    console.log(err.message);
     res.status(500).json(err);
   }
 });
@@ -100,10 +93,10 @@ router.post('/logout', (req, res) => {
   if (req.session.loggedIn) {
     req.session.destroy(err => {
       if (err) {
-        return res.status(500).json({ message: 'Failed to log out, please try again.'})
+        return res.status(500).json({ message: 'Failed to log out, please try again.' })
       }
       res.redirect('/'); //redirect to homepage
-      
+
     });
   } else {
     res.status(404).send("no active session to log out");

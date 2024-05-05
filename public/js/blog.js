@@ -1,36 +1,3 @@
-// READ BLOG Event listener for clicking the "Read" button 
-// using event bubbling for dynamic buttons
-document.addEventListener('click', function (e) {
-    if (e.target.classList.contains('read-blog')) {
-        const blogId = e.target.getAttribute('data-id'); // Get the blog ID from the custom data attribute
-        readBlog(blogId);
-    }
-});
-
-//READ BLOG Function 
-async function readBlog(blogId) {
-    try {
-        const response = await fetch(`/api/blog/${blogId}`, {
-            method: 'GET',
-            headers: { 'Content-Type': 'application/json' },
-        });
-        if (response.ok) {
-            document.location.replace(`/blog/${blogId}`);
-        } else {
-            const responseData = await response.json();
-            if (response.status === 400) {
-                alert(responseData.message || 'Bad request.');
-            } else {
-                alert('Failed to fetch this blog.');
-            }
-        }
-    } catch (error) {
-        console.error('Something went terribly wrong, check your dashboard.', error);
-        alert('Something went terribly wrong, check your dashboard.');
-    }
-}
-
-
 // DELETE BLOG Event listener for clicking the "Read" button 
 // using event bubbling for dynamic buttons
 document.addEventListener('click', function (e) {

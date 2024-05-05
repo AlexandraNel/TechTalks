@@ -18,19 +18,6 @@ router.post('/', withAuths, async (req, res) => {
   }
 });
 
-// getblogs
-router.get('/', withAuths, async (req, res) => {
-  try {
-    const allBlogs = await Blog.findAll({
-      include: { model: User, attributes: ['username'] }
-    });
-
-    res.json(allBlogs);
-    
-  } catch (err) {
-    res.status(500).json(err);
-  }
-});
 
 //getOneBlog (id is fed through the button FETCH request)
 router.get('/:id', withAuths, async (req, res) => {
@@ -54,7 +41,6 @@ router.delete('/:id', withAuths, async (req, res) => {
     const blogData = await Blog.destroy({
       where: {
         id: req.params.id,
-        user_id: req.session.user_id,
       },
     });
 
@@ -65,6 +51,7 @@ router.delete('/:id', withAuths, async (req, res) => {
 
     res.status(200).json(blogData);
   } catch (err) {
+    console.log(err.message);
     res.status(500).json(err);
   }
 });
