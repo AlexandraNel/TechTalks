@@ -1,25 +1,30 @@
 const sequelize = require('../config/connection');
-const { User, Blog, Comment } = require('../models');
+const { User, Blog} = require('../models');
 
 const userData = require('./userData.json');
 const blogData = require('./blogData.json');
 // const commentData = require('./commentData.json');
 
 const seedDatabase = async () => {
-  await sequelize.sync({ force: true });
+  await sequelize.sync({ force: true });  // Resets your database, be cautious with this in production
 
+  // Bulk create users
   const users = await User.bulkCreate(userData, {
-    individualHooks: true,
-    returning: true,
+      individualHooks: true,
+      returning: true,
   });
 
-  for (const blog of blogData) {
-    await Blog.create({
-      ...blog,
-      user_id: users[Math.floor(Math.random() * users.length)].id,
-    });
-  }
+  // Bulk create blogs and directly await their creation without storing them
+  await Promise.all(
+      blogData.map(blog => {
+          return Blog.create({
+              ...blog,
+              user_id: users[Math.floor(Math.random() * users.length)].id,  // Randomly assign user ids to blogs
+          });
+      })
+  );
 
+  console.log('All models were synchronized successfully.');
   process.exit(0);
 };
 
