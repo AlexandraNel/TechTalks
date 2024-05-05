@@ -4,4 +4,10 @@
     background-image: linear-gradient(to left, #66B7D3, white); /* brand blue bg */
 };
 
+.card-container {
+    display: flex;
+    justify-content: center; /* Center the card horizontally */
+    padding: 20px; /* Add some padding around the container */
+}
+
 

@@ -48,6 +48,7 @@ This application is deployed. Once you come to the landing page a user is able t
 ## Usage
 
 Create a new blog by pressing the new blog button on your dashboard, after you have signed in. Onc eyou have written your blog, other users can comment and you can interact on other users blog posts too
+![use gif](./video.gif)
 
 ## Roadmap
 

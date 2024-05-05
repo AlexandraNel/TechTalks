@@ -1,35 +1,33 @@
 <!-- views/partials/dashboard.handlebars -->
-
+<div class="m-5 p-2 text-center text-info">
 <h1>Dashboard</h1>
-<h2>Welcome, {{username}}!</h2>
-
-<div>
-
-    <a href="/newblog" class="btn btn-warning newBlogBtn" role="button">New Blog</a>
+<h2 class="text-warning">Welcome, {{username}}!</h2>
 </div>
 
 {{#if allBlogs.length}}
-<div class='blog-container'>
+<div class='blog-container m-5'>
     <div class='blog-header col-md-10'>
         <h2>Blog Entries</h2>
     </div>
     {{#each allBlogs as |blog|}}
-    <div class="card mb-3 shadow rounded">
+    <div class = "card-container">
+    <div class="card mb-5 shadow rounded in-line">
         <div class="card-body">
             <h5 class="card-title">{{ blog.title }}</h5>
-            <p class="card-text">Author: {{ blog.username }}</p>
+            <p class="card-text">Author: {{ User.username }}</p>
             <p class="card-text">{{ truncate blog.body 50 }}</p>
             <!-- Display a partial of the body text, limit to 500 characters -->
             <a href="/blog/{{blog.id}}" class="btn btn-warning newBlogBtn" role="button">Read</a>
-
-
-
         </div>
+    </div>
     </div>
     {{/each}}
 </div>
 {{else}}
 <p>No blogs found.</p>
 {{/if}}
+<div class= "m-2 p-2">
+    <a href="/newblog" class="btn btn-warning newBlogBtn" role="button">New Blog</a>
+</div>
 
    <script src="/js/blog.js"></script>
