@@ -6,7 +6,7 @@ const blogData = require('./blogData.json');
 // const commentData = require('./commentData.json');
 
 const seedDatabase = async () => {
-  await sequelize.sync({ force: true });  // Resets your database, be cautious with this in production
+  await sequelize.sync({ force: false });  // Resets your database, be cautious with this in production
 
   // Bulk create users
   const users = await User.bulkCreate(userData, {
